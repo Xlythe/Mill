@@ -36,6 +36,8 @@ public class GameObject{
 		        		//Check for 3 in a row
 		        		Posn lastMove = Global.getMoveList().get(Global.getMoveList().size()-1);
 		        		if(BoardTools.checkFor3(lastMove)){
+		        			Global.getBoard().postInvalidate();
+		        			
 		        			//TODO Let Player2 remove one of Player1's pieces
 		    	        	Global.setP1BoardPieces(Global.getP1BoardPieces()-1);
 		        		}

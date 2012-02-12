@@ -57,6 +57,8 @@ public class BoardView extends View{
 		int y=height;
 		int spacing=0;
 		
+		//TODO Map out the correct shapes, create 'pieces' that are placed on top
+		
 		//Shape of a corner (top right)
 		Path corner_tr_path = new Path();
 		corner_tr_path.moveTo(0, 0+L/2);

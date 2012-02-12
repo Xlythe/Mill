@@ -7,11 +7,4 @@
             android:defaultValue="0"
             android:entries="@array/gameModeArray"
             android:entryValues="@array/gameModeValues" />
-        <ListPreference
-            android:title="Game Size"
-            android:summary="Pick a size for the gameboard"
-            android:key="gameSizePref"
-            android:defaultValue="7"
-            android:entries="@array/gameSizeArray"
-            android:entryValues="@array/gameSizeValues" />
 </PreferenceScreen>
