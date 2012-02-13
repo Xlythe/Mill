@@ -76,6 +76,8 @@ public class Mill extends Activity {
     	Global.setP1BoardPieces(0);
     	Global.setP2Pieces(9);
     	Global.setP2BoardPieces(0);
+    	Global.setRemove(false);
+    	Global.setHighlighted(null);
     	
     	//Set game mode
     	Global.setGameType(prefs.getString("gameModePref", "0"));

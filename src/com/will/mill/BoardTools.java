@@ -10,8 +10,20 @@ public class BoardTools{
 	public static boolean makeMove(final int x, final int y, final byte team){
 		if(Global.getRunning() && team==1){
 			if(Global.getRemove()){
+				//Dont remove your own piece
 				if(Global.getGameboard()[x][y]!=(byte) team%2+1){
 					return false;
+				}
+				
+				//If there's a piece not in a mill, you have to take that first
+				if(checkFor3(new Posn(x,y))){
+					for(int i=0;i<Global.getN();i++){
+						for(int j=0;j<Global.getN();j++){
+							if(Global.getGameboard()[i][j]==(byte) team%2+1 && !checkFor3(new Posn(i,j))){
+								return false;
+							}
+						}
+					}
 				}
 				
 				Global.setGameboard(x,y,(byte) 0);
@@ -59,8 +71,20 @@ public class BoardTools{
 		}
 		else if(Global.getRunning() && team==2){
 			if(Global.getRemove()){
+				//Dont remove your own piece
 				if(Global.getGameboard()[x][y]!=(byte) team%2+1){
 					return false;
+				}
+				
+				//If there's a piece not in a mill, you have to take that first
+				if(checkFor3(new Posn(x,y))){
+					for(int i=0;i<Global.getN();i++){
+						for(int j=0;j<Global.getN();j++){
+							if(Global.getGameboard()[i][j]==(byte) team%2+1 && !checkFor3(new Posn(i,j))){
+								return false;
+							}
+						}
+					}
 				}
 				
 				Global.setGameboard(x,y,(byte) 0);
@@ -111,8 +135,135 @@ public class BoardTools{
 	}
 	
 	public static boolean checkIfValid(Posn highlighted, Posn move){
-		//TODO Check if a piece can be moved here
-		return true;
+		//Quick check
+		if(highlighted.getX()!=move.getX() && highlighted.getY()!=move.getY()){
+			return false;
+		}
+		
+		//Longer check
+		if(highlighted.getX()==0 && highlighted.getY()==0){
+			if((move.getX()==3 && move.getY()==0) || (move.getX()==0 && move.getY()==3)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==3 && highlighted.getY()==0){
+			if((move.getX()==0 && move.getY()==0) || (move.getX()==6 && move.getY()==0) || (move.getX()==3 && move.getY()==1)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==6 && highlighted.getY()==0){
+			if((move.getX()==3 && move.getY()==0) || (move.getX()==6 && move.getY()==3)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==1 && highlighted.getY()==1){
+			if((move.getX()==3 && move.getY()==1) || (move.getX()==1 && move.getY()==3)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==3 && highlighted.getY()==1){
+			if((move.getX()==3 && move.getY()==0) || (move.getX()==1 && move.getY()==1) || (move.getX()==5 && move.getY()==1) || (move.getX()==2 && move.getY()==3)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==5 && highlighted.getY()==1){
+			if((move.getX()==3 && move.getY()==1) || (move.getX()==5 && move.getY()==3)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==2 && highlighted.getY()==2){
+			if((move.getX()==3 && move.getY()==2) || (move.getX()==2 && move.getY()==3)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==3 && highlighted.getY()==2){
+			if((move.getX()==3 && move.getY()==1) || (move.getX()==2 && move.getY()==2) || (move.getX()==4 && move.getY()==2)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==4 && highlighted.getY()==2){
+			if((move.getX()==3 && move.getY()==2) || (move.getX()==4 && move.getY()==3)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==0 && highlighted.getY()==3){
+			if((move.getX()==0 && move.getY()==0) || (move.getX()==1 && move.getY()==3) || (move.getX()==0 && move.getY()==6)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==1 && highlighted.getY()==3){
+			if((move.getX()==1 && move.getY()==1) || (move.getX()==0 && move.getY()==3) || (move.getX()==2 && move.getY()==3) || (move.getX()==1 && move.getY()==5)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==2 && highlighted.getY()==3){
+			if((move.getX()==2 && move.getY()==2) || (move.getX()==1 && move.getY()==3) || (move.getX()==2 && move.getY()==4)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==4 && highlighted.getY()==3){
+			if((move.getX()==4 && move.getY()==2) || (move.getX()==5 && move.getY()==3) || (move.getX()==4 && move.getY()==4)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==5 && highlighted.getY()==3){
+			if((move.getX()==5 && move.getY()==1) || (move.getX()==4 && move.getY()==3) || (move.getX()==6 && move.getY()==3) || (move.getX()==5 && move.getY()==5)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==6 && highlighted.getY()==3){
+			if((move.getX()==6 && move.getY()==0) || (move.getX()==5 && move.getY()==3) || (move.getX()==6 && move.getY()==6)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==2 && highlighted.getY()==4){
+			if((move.getX()==2 && move.getY()==3) || (move.getX()==3 && move.getY()==4)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==3 && highlighted.getY()==4){
+			if((move.getX()==2 && move.getY()==4) || (move.getX()==4 && move.getY()==4) || (move.getX()==3 && move.getY()==5)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==4 && highlighted.getY()==4){
+			if((move.getX()==4 && move.getY()==3) || (move.getX()==3 && move.getY()==4)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==1 && highlighted.getY()==5){
+			if((move.getX()==1 && move.getY()==3) || (move.getX()==3 && move.getY()==5)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==3 && highlighted.getY()==5){
+			if((move.getX()==3 && move.getY()==4) || (move.getX()==1 && move.getY()==5) || (move.getX()==5 && move.getY()==5) || (move.getX()==3 && move.getY()==6)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==5 && highlighted.getY()==5){
+			if((move.getX()==5 && move.getY()==3) || (move.getX()==3 && move.getY()==5)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==0 && highlighted.getY()==6){
+			if((move.getX()==0 && move.getY()==3) || (move.getX()==3 && move.getY()==6)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==3 && highlighted.getY()==6){
+			if((move.getX()==3 && move.getY()==5) || (move.getX()==0 && move.getY()==6) || (move.getX()==6 && move.getY()==6)){
+				return true;
+			}
+		}
+		else if(highlighted.getX()==6 && highlighted.getY()==6){
+			if((move.getX()==6 && move.getY()==3) || (move.getX()==3 && move.getY()==6)){
+				return true;
+			}
+		}
+		
+		
+		return false;
 	}
 	
 	public static boolean checkFor3(Posn lastMove){
