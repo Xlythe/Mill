@@ -9,16 +9,23 @@ package com.will.mill;
 
 public final class R {
     public static final class array {
+        /**  <item>PvC</item>
+        <item>CvP</item>
+        <item>CvC</item> 
+         */
         public static final int gameModeArray=0x7f040000;
+        /**  <item>1</item>
+        <item>2</item>
+        <item>3</item> 
+         */
         public static final int gameModeValues=0x7f040001;
-        public static final int gameSizeArray=0x7f040002;
-        public static final int gameSizeValues=0x7f040003;
     }
     public static final class attr {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
         public static final int icon=0x7f020001;
+        public static final int icon_old=0x7f020002;
     }
     public static final class id {
         public static final int newgame=0x7f060002;

@@ -9,7 +9,18 @@ public class BoardTools{
 	
 	public static boolean makeMove(final int x, final int y, final byte team){
 		if(Global.getRunning() && team==1){
-			if(Global.getP1Pieces()>0){
+			if(Global.getRemove()){
+				if(Global.getGameboard()[x][y]!=(byte) team%2+1){
+					return false;
+				}
+				
+				Global.setGameboard(x,y,(byte) 0);
+	        	Global.setP2BoardPieces(Global.getP2BoardPieces()-1);
+	        	Global.setRemove(false);
+	        	
+	        	return true;
+			}
+			else if(Global.getP1Pieces()>0){
 				if(Global.getGameboard()[x][y]!=0){
 					return false;
 				}
@@ -47,7 +58,18 @@ public class BoardTools{
 			}
 		}
 		else if(Global.getRunning() && team==2){
-			if(Global.getP2Pieces()>0){
+			if(Global.getRemove()){
+				if(Global.getGameboard()[x][y]!=(byte) team%2+1){
+					return false;
+				}
+				
+				Global.setGameboard(x,y,(byte) 0);
+	        	Global.setP1BoardPieces(Global.getP1BoardPieces()-1);
+	        	Global.setRemove(false);
+	        	
+	        	return true;
+			}
+			else if(Global.getP2Pieces()>0){
 				if(Global.getGameboard()[x][y]!=0){
 					return false;
 				}

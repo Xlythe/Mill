@@ -23,6 +23,7 @@ public class Global{
 	private static Posn highlighted;
 	private static int p1BoardPieces;
 	private static int p2BoardPieces;
+	private static boolean remove;
 	public static int getN() {
 		return n;
 	}
@@ -143,5 +144,11 @@ public class Global{
 	}
 	public static void setP2BoardPieces(int pieces){
 		Global.p2BoardPieces = pieces;
+	}
+	public static boolean getRemove(){
+		return remove;
+	}
+	public static void setRemove(boolean bool){
+		Global.remove = bool;
 	}
 }

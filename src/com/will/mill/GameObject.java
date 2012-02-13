@@ -16,11 +16,12 @@ public class GameObject{
 		        		//Check for 3 in a row
 		        		Posn lastMove = Global.getMoveList().get(Global.getMoveList().size()-1);
 		        		if(BoardTools.checkFor3(lastMove)){
-		        			//TODO Let Player1 remove one of Player2's pieces
-		    	        	Global.setP2BoardPieces(Global.getP2BoardPieces()-1);
+		        			Global.getBoard().postInvalidate();
+		        			Global.setRemove(true);
+		        			Global.getPlayer1().getPlayerTurn();
 		        		}
 		        		
-		        		
+		        		//TODO Add check for inability to make a move
 		        		//Check for victory
 		        		if(BoardTools.checkWinPlayer1()) 
 		        			Global.setRunning(false);
@@ -37,9 +38,8 @@ public class GameObject{
 		        		Posn lastMove = Global.getMoveList().get(Global.getMoveList().size()-1);
 		        		if(BoardTools.checkFor3(lastMove)){
 		        			Global.getBoard().postInvalidate();
-		        			
-		        			//TODO Let Player2 remove one of Player1's pieces
-		    	        	Global.setP1BoardPieces(Global.getP1BoardPieces()-1);
+		        			Global.setRemove(true);
+		        			Global.getPlayer2().getPlayerTurn();
 		        		}
 		        		
 		        		
